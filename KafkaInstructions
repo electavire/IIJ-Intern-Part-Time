@@ -1,0 +1,55 @@
+Quick Start Guide:
+https://kafka.apache.org/quickstart
+
+When downloading the release, the download should be checked using
+the sha1sum linux commnand, and then verified at:
+https://www.apache.org/info/verification.html
+(Theres an input box for the return value of sha1sum)
+For security reasons and whatnot.
+
+Return to the quick start at the top
+IMPORTATNT NOTE!!!
+When doing the initial zookeeper startup with
+> bin/zookeeper-server-start.sh config/zookeeper.properties
+It wont terminate, ending with:
+[2018-10-30 15:09:05,356] INFO binding to port 0.0.0.0/0.0.0.0:2181 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+and not giving the user command back.  It now just acts
+as a log for zookeeper so open a new terminal to start kafka.
+
+
+After using:
+> bin/kafka-server-start.sh config/server.properties
+Its the same idea with zookeeper, this terminal now acts
+as a log for kafka.  To give Kafka any commands, we need
+one more terminal.
+
+
+Also going to want to install the python kafka client,
+can be done easily with:
+
+pip install kafka-python
+
+For Testing Purposes, console consumers and producers can be used.
+
+To creat a console consumer:
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+(Topic name should be changed accordingly)
+
+To create a console producer:
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+(Again, topic name should be changed according to needs)
+
+
+Stop Command:
+bin/kafka-server-stop.sh config/server.properties
+
+Questions to be asked:
+How is the data currently being used?
+
+Is each program using the data on a seperate machine? or all on one?(Need to know for kafka partitioning, connecting each other)
+
+CURRENTLY trying to continuously produce data to the kafka broker
+Was able to upload one batch from ATLAS, but doing so continuously caused problems. Didnt figure out sleep yet tough. 
+Hoping that solves problems.
+
+
